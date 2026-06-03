@@ -1,0 +1,70 @@
+{
+  "items": [
+    {
+      "type": "image",
+      "src": "gallery/1.jpeg",
+      "caption": "Shellac work in progress"
+    },
+    {
+      "type": "video",
+      "src": "gallery/9.mp4",
+      "caption": "Behind the Scenes"
+    },  
+    {
+      "type": "image",
+      "src": "gallery/2.jpeg",
+      "caption": "Stain work in progress"
+    },    
+    {
+      "type": "image",
+      "src": "gallery/3.jpeg",
+      "caption": "buat meja untuk nk guna sendiri :D"
+    },    
+    {
+      "type": "image",
+      "src": "gallery/4.jpeg",
+      "caption": "buat byk2 tapi belum finishing"
+    },
+    {
+      "type": "image",
+      "src": "gallery/5.jpeg",
+      "caption": "tempahan meja"
+    },
+    {
+      "type": "image",
+      "src": "gallery/6.jpeg",
+      "caption": "Behind the Scenes"
+    },
+
+    {
+      "type": "video",
+      "src": "gallery/10.mp4",
+      "caption": "Behind the Scenes"
+    },    
+    {
+      "type": "video",
+      "src": "gallery/11.mp4",
+      "caption": "Behind the Scenes"
+    },    
+    {
+      "type": "video",
+      "src": "gallery/12.mp4",
+      "caption": "Behind the Scenes"
+    },  
+    {
+      "type": "image",
+      "src": "gallery/7.jpeg",
+      "caption": "NICE"
+    },  
+      {
+      "type": "image",
+      "src": "gallery/8.jpeg",
+      "caption": "NICE"
+    },  
+    {
+      "type": "video",
+      "src": "gallery/13.mp4",
+      "caption": "Behind the Scenes"
+    }
+  ]
+}

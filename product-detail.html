@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Detail - FA CRAFT</title>
+  <meta name="description" content="View detailed specifications, colors, and pricing for FA CRAFT handcrafted wood products. Order directly via WhatsApp.">
+  <meta property="og:title" content="FA CRAFT - Artisan Woodworks">
+  <meta property="og:description" content="Handcrafted solid wood furniture and organizers.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/600x600?text=FA+CRAFT">
+  <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪵</text></svg>">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    * { box-sizing: border-box; }
+    html, body { width: 100%; margin: 0; padding: 0; overflow-x: hidden; font-family: 'Inter', sans-serif; background: #f4f5f7; scroll-behavior: smooth; }
+    img { max-width: 100%; height: auto; display: block; }
+    :root{ --bg: #f4f5f7; --card: #ffffff; --muted: #6b7280; --accent: #111827; --border: #e6e7ea; --radius: 12px; }
+    .wrap { max-width: 980px; width: 100%; margin: 18px auto; padding: 12px; }
+    .card { background: var(--card); border-radius: var(--radius); box-shadow: 0 6px 20px rgba(15,23,42,0.06); overflow: hidden; display: grid; grid-template-columns: 1fr; width: 100%; }
+    @media (min-width: 820px) { .card { grid-template-columns: 1fr 1fr; } }
+    .image-wrapper { padding: 18px; display: flex; justify-content: center; align-items: center; background: #fafafa; border-bottom: 1px solid var(--border); }
+    @media (min-width: 820px) { .image-wrapper { padding: 24px; border-right: 1px solid var(--border); border-bottom: none; } }
+    .image-wrapper .swiper { width: 94%; max-width: 420px; }
+    .image-wrapper .swiper-slide img { max-width: 100%; height: auto; aspect-ratio: 1/1; object-fit: contain; border-radius: 8px; }
+    .swiper-button-next, .swiper-button-prev { color: rgba(0,0,0,0.8); }
+    .details { padding: 16px; display: flex; flex-direction: column; gap: 10px; min-width: 0; word-break: break-word; }
+    .product-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .product-title { font-size: 1.125rem; font-weight: 700; margin: 0; color: var(--accent); flex: 1; }
+    .price { font-size: 1rem; font-weight: 700; color: #000; margin: 0; white-space: nowrap; }
+    .price-old { text-decoration: line-through; color: #9CA894; font-size: 0.85rem; font-weight: 400; margin-right: 8px; }
+    .discount-tag { background: #E63946; color: white; font-size: 0.7rem; font-weight: 600; padding: 2px 8px; border-radius: 20px; margin-left: 8px; display: inline-block; }
+    .section { margin-top: 6px; }
+    .section h4 { font-size: 0.82rem; margin: 0 0 8px 0; color: var(--muted); font-weight: 700; }
+    .select-wrapper { position: relative; width: 100%; }
+    .select-wrapper select { width: 100%; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 8px; background-color: #f8f9fb; font-size: 0.9rem; appearance: none; cursor: pointer; }
+    .select-wrapper::after { content: "▼"; font-size: 0.7rem; position: absolute; right: 12px; top: 50%; transform: translateY(-50%); pointer-events: none; color: #6b7280; }
+    #materialList { font-size: 0.90rem; color: #374151; line-height: 1.45; }
+    .action-buttons { display: flex; gap: 10px; margin-top: 12px; align-items: center; flex-wrap: wrap; }
+    .btn { display: flex; align-items: center; justify-content: center; border-radius: 10px; font-weight: 700; text-decoration: none; border: none; }
+    .btn-back { flex: 0 0 34%; background: #fff; color: #111827; border: 1px solid #d1d5db; height: 44px; }
+    .btn-proceed { flex: 1; background: #10947e; color: #ffffff; height: 44px; opacity: 0.6; pointer-events: none; }
+    .btn-proceed.enabled { opacity: 1; pointer-events: auto; cursor: pointer; }
+    @media (max-width:420px) { .wrap { margin: 0; padding: 10px; } .card { border-radius: 0; } .product-title { font-size: 1rem; } .details { padding: 12px; } .action-buttons .btn-back { flex-basis: 46%; } .action-buttons .btn-proceed { flex-basis: 48%; } }
+    .description-card { background: var(--card); border-radius: var(--radius); box-shadow: 0 6px 20px rgba(15,23,42,0.06); margin-top: 18px; overflow: hidden; }
+    .description-card .details { padding: 16px; }
+    #productDescription { width: 100%; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 8px; background-color: #f8f9fb; font-size: 0.9rem; color: #111827; line-height: 1.6; white-space: pre-line; }
+    #productDescription img { display: block; margin: 14px auto; border-radius: 8px; max-width: 100%; }
+    .footer { border-top: 1px solid #EFECE4; padding: 48px 0 32px; background: #FFFFFF; margin-top: 32px; }
+    .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 32px; max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+    .footer-brand p { color: #6B7C63; font-size: 0.85rem; margin-top: 12px; }
+    .footer-links { display: flex; gap: 48px; flex-wrap: wrap; }
+    .footer-links h4 { font-size: 0.9rem; margin-bottom: 16px; color: #1F2A1B; }
+    .footer-links a { display: block; color: #5B6E5C; text-decoration: none; font-size: 0.85rem; margin-bottom: 10px; }
+    .footer-links a:hover { color: #1F2A1B; }
+    .copyright { text-align: center; margin-top: 48px; font-size: 0.75rem; color: #9CA894; border-top: 1px solid #EFECE4; padding-top: 28px; }
+    @media (max-width: 640px) { .footer-inner { flex-direction: column; text-align: center; } .footer-links { justify-content: center; } }
+    .loading-indicator { text-align: center; padding: 40px; color: #666; }
+    .error-container { text-align: center; padding: 60px 20px; background: white; border-radius: var(--radius); max-width: 600px; margin: 40px auto; }
+    .error-container h2 { margin-bottom: 16px; }
+    .back-to-top { position: fixed; bottom: 20px; right: 20px; background: #1F2A1B; color: white; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; transition: opacity 0.3s; z-index: 99; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+    .back-to-top.visible { opacity: 1; }
+    .back-to-top i { font-size: 1.2rem; }
+  </style>
+</head>
+<body>
+<div id="navbar-placeholder"></div>
+<div class="wrap" id="productDetailWrap" style="display: none;">
+  <div class="card">
+    <div class="image-wrapper"><div class="swiper mySwiper"><div class="swiper-wrapper" id="productImageCarousel"></div><div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div></div></div>
+    <div class="details">
+      <div class="product-header"><h1 class="product-title" id="productName"></h1><div id="promoFlagContainer" style="margin-left: auto;"></div><p class="price" id="priceDisplay">RM <span id="price">0.00</span></p></div>
+      <div class="section"><h4>Material Type</h4><div class="select-wrapper"><select id="typeOptions"></select></div></div>
+      <div class="section"><h4>Materials</h4><div id="materialList"></div></div>
+      <div class="section" id="colorSection"><h4>Color</h4><div class="select-wrapper"><select id="colorOptions"></select></div></div>
+      <div id="accessoriesContainer"></div>
+      <div class="action-buttons"><a href="our-products.html" class="btn btn-back">&larr; Back</a><a id="whatsappBtn" class="btn btn-proceed" href="#">PreOrder Now</a></div>
+    </div>
+  </div>
+  <div class="description-card"><div class="details"><div class="section"><h4>Product Description</h4><div id="productDescription"></div></div></div></div>
+</div>
+<div class="loading-indicator" id="loadingIndicator">Loading product details...</div>
+<div id="errorContainer" style="display:none;"></div>
+<div class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></div>
+<footer class="footer"><div class="footer-inner"><div class="footer-brand"><h3>FA CRAFT</h3><p>Functional · Artisan · Solid Wood<br>Made with intention, crafted in Malaysia.</p></div><div class="footer-links"><div><h4>Explore</h4><a href="our-products.html">Shop</a><a href="gallery.html">Gallery</a><a href="promotion.html">Promotions</a><a href="contact.html">Contact</a></div><div><h4>Connect</h4><a href="https://www.tiktok.com/@pejo_00?_r=1&_t=ZS-96rhsKmuVBi" target="_blank">TikTok</a><a href="https://wa.me/601111213149" target="_blank">WhatsApp</a></div></div></div><div class="copyright"><p>&copy; 2025 FA CRAFT — Solid wood furniture & home organizers. All rights reserved.</p></div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="price-utils.js"></script>
+<script>
+  (function() {
+    const placeholder = document.getElementById('navbar-placeholder');
+    if (placeholder) fetch('navbar.html').then(res => res.ok ? res.text() : Promise.reject()).then(html => { placeholder.innerHTML = html; const btn = document.getElementById('navbarToggle'); const menu = document.getElementById('navbarMenu'); if (btn && menu) { const newBtn = btn.cloneNode(true); btn.parentNode.replaceChild(newBtn, btn); newBtn.addEventListener('click', () => { const expanded = newBtn.getAttribute('aria-expanded') === 'true'; newBtn.setAttribute('aria-expanded', !expanded); newBtn.classList.toggle('is-active'); menu.classList.toggle('is-active'); }); } }).catch(() => { placeholder.innerHTML = `<nav style="background:#fff; border-bottom:1px solid #eee; padding:0.75rem 1.5rem;"><div style="max-width:1280px; margin:0 auto; display:flex; gap:1.5rem; justify-content:center;"><a href="index.html">Home</a><a href="our-products.html">Products</a><a href="gallery.html">Gallery</a><a href="contact.html">Contact</a></div></nav>`; });
+  })();
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const productId = urlParams.get('id');
+  let productData = null, optionsData = null;
+  let selectedType = null, selectedColor = null, selectedAccessories = {};
+  let swiper = null;
+
+  async function fetchData() {
+    try {
+      const [pRes, oRes] = await Promise.all([fetch('products.json'), fetch('options.json')]);
+      const products = await pRes.json();
+      optionsData = await oRes.json();
+      window.optionsData = optionsData;
+      productData = products.find(p => p.id === productId);
+      if (!productData) throw new Error('Product not found');
+      document.getElementById('loadingIndicator').style.display = 'none';
+      document.getElementById('productDetailWrap').style.display = 'block';
+      renderProduct();
+    } catch(e) {
+      document.getElementById('loadingIndicator').style.display = 'none';
+      const errorDiv = document.getElementById('errorContainer');
+      errorDiv.style.display = 'block';
+      errorDiv.innerHTML = `<div class="error-container"><h2>🛠 Product not found</h2><p>We couldn't find the item you're looking for.</p><a href="our-products.html" class="btn-back" style="display:inline-block; padding:10px 20px; margin-top:20px;">Browse all products →</a></div>`;
+    }
+  }
+
+  function renderProduct() {
+    document.getElementById('productName').textContent = productData.name;
+    document.getElementById('productDescription').innerHTML = productData.description || '';
+    initProductCarousel(productData);
+    renderTypeOptions();
+    renderAccessories();
+    updatePriceAndPromo(); // will call compute with current selections
+    validateProceedButton();
+  }
+
+  function getAllTypes() { return Object.keys(productData).filter(k => k.toLowerCase().startsWith('type')); }
+  const typeNameMap = { 'type 1': 'Melamine Chipboard', 'type 2': 'Blockboard + Formica', 'type 3': 'Solid Rubberwood' };
+
+  function renderTypeOptions() {
+    const container = document.getElementById('typeOptions');
+    const typeKeys = getAllTypes();
+    if(!typeKeys.length) return;
+    typeKeys.forEach(tk => { const opt = document.createElement('option'); opt.value = tk; opt.textContent = typeNameMap[tk] || tk; container.appendChild(opt); });
+    selectedType = typeKeys[0];
+    container.value = selectedType;
+    container.addEventListener('change', (e) => { selectedType = e.target.value; renderMaterialList(selectedType); renderColorOptions(selectedType); updatePriceAndPromo(); syncCarouselWithColor(); validateProceedButton(); });
+    renderMaterialList(selectedType);
+    renderColorOptions(selectedType);
+  }
+
+  function renderMaterialList(typeKey) {
+    const container = document.getElementById('materialList');
+    const typeData = productData[typeKey];
+    const entries = Object.entries(typeData).filter(([k]) => !k.toLowerCase().includes('color'));
+    if(!entries.length) { container.textContent = 'No materials.'; return; }
+    const ul = document.createElement('ul'); ul.style.paddingLeft = '18px'; ul.style.margin = '0';
+    entries.forEach(([mat]) => { const li = document.createElement('li'); li.textContent = mat; ul.appendChild(li); });
+    container.innerHTML = ''; container.appendChild(ul);
+  }
+
+  function renderColorOptions(typeKey) {
+    const container = document.getElementById('colorOptions');
+    container.innerHTML = '';
+    const typeData = productData[typeKey];
+    const colorGroups = Object.entries(typeData).filter(([k]) => k.toLowerCase().includes('color'));
+    if(!colorGroups.length) { container.innerHTML = '<option>No colors</option>'; selectedColor = null; return; }
+    const colorsSet = new Set();
+    colorGroups.forEach(([_, colorsObj]) => Object.keys(colorsObj).forEach(c => colorsSet.add(c)));
+    const colors = Array.from(colorsSet);
+    selectedColor = colors[0] || null;
+    colors.forEach(c => { const opt = document.createElement('option'); opt.value = c; opt.textContent = c; container.appendChild(opt); });
+    container.value = selectedColor;
+    container.addEventListener('change', (e) => { selectedColor = e.target.value; updatePriceAndPromo(); syncCarouselWithColor(); validateProceedButton(); });
+  }
+
+  function renderAccessories() {
+    const container = document.getElementById('accessoriesContainer');
+    container.innerHTML = '';
+    const typeKeys = getAllTypes();
+    const excluded = ['id','name','images','category','description',...typeKeys];
+    const accKeys = Object.keys(productData).filter(k => !excluded.includes(k));
+    if(!accKeys.length) return;
+    accKeys.forEach(accKey => {
+      const accData = productData[accKey];
+      const accOpts = optionsData.accessory?.[accKey];
+      if(!accData || !accOpts) return;
+      const section = document.createElement('div'); section.className = 'section';
+      const h4 = document.createElement('h4'); h4.textContent = accKey.replace(/([A-Z])/g, ' $1').replace(/^./, s=>s.toUpperCase());
+      section.appendChild(h4);
+      const wrapper = document.createElement('div'); wrapper.className = 'select-wrapper';
+      const select = document.createElement('select');
+      Object.keys(accOpts).forEach(opt => { const option = document.createElement('option'); option.value = opt; option.textContent = opt; select.appendChild(option); });
+      wrapper.appendChild(select); section.appendChild(wrapper); container.appendChild(section);
+      selectedAccessories[accKey] = Object.keys(accOpts)[0];
+      select.addEventListener('change', (e) => { selectedAccessories[accKey] = e.target.value; updatePriceAndPromo(); validateProceedButton(); });
+    });
+  }
+
+  function computeCurrentPrice() {
+    if (!productData || !selectedType || !selectedColor) return 0;
+    const original = calculatePriceWithSelections(productData, selectedType, selectedColor, selectedAccessories, optionsData);
+    return applyDiscount(productData, original);
+  }
+
+  function updatePriceAndPromo() {
+    const discounted = computeCurrentPrice();
+
+    const originalFull = calculatePriceWithSelections(
+      productData,
+      selectedType,
+      selectedColor,
+      selectedAccessories,
+      optionsData
+    );
+    
+    const priceSpan = document.getElementById('price');
+    const priceContainer = document.getElementById('priceDisplay');
+    const promoContainer = document.getElementById('promoFlagContainer');
+    if(productData.promotion) {
+      let discountText = productData.discountType === 'percentage' ? `${productData.discountValue}% OFF` : `RM${productData.discountValue} OFF`;
+      promoContainer.innerHTML = `<span class="discount-tag"><i class="fas fa-fire"></i> ${discountText}</span>`;
+      priceContainer.innerHTML = `<span class="price-old">RM ${originalFull.toFixed(2)}</span> RM ${discounted.toFixed(2)}`;
+      priceSpan.style.display = 'none';
+    } else {
+      promoContainer.innerHTML = '';
+      priceContainer.innerHTML = `RM <span id="price">${discounted.toFixed(2)}</span>`;
+    }
+    // Update WhatsApp link
+    const isValid = selectedType && selectedColor;
+    const whatsappBtn = document.getElementById('whatsappBtn');
+    if(isValid) {
+      let msg = `Hi, I want to order ${productData.name}.\nMaterial Type: ${typeNameMap[selectedType] || selectedType}\nColor: ${selectedColor}\n`;
+      for(const [ak, av] of Object.entries(selectedAccessories)) msg += `${ak.replace(/([A-Z])/g, ' $1')}: ${av}\n`;
+      if(productData.promotion) msg += `Promotion: ${productData.discountType === 'percentage' ? productData.discountValue+'% off' : 'RM'+productData.discountValue+' off'} applied.\n`;
+      msg += `Price: RM ${discounted.toFixed(2)}`;
+      whatsappBtn.href = `https://wa.me/601111213149?text=${encodeURIComponent(msg)}`;
+      whatsappBtn.classList.add('enabled');
+    } else {
+      whatsappBtn.href = '#';
+      whatsappBtn.classList.remove('enabled');
+    }
+  }
+
+  function validateProceedButton() { updatePriceAndPromo(); }
+
+  function initProductCarousel(product) {
+    const carousel = document.getElementById('productImageCarousel');
+    carousel.innerHTML = '';
+    if(product.images && product.images.extra) product.images.extra.forEach(img => { const slide = document.createElement('div'); slide.classList.add('swiper-slide'); slide.innerHTML = `<img src="${img}" alt="Product view">`; carousel.appendChild(slide); });
+    if(product.images) Object.entries(product.images).forEach(([key, val]) => { if(key !== 'extra') { const slide = document.createElement('div'); slide.classList.add('swiper-slide'); slide.setAttribute('data-color', key.toLowerCase().trim()); slide.innerHTML = `<img src="${val}" alt="${key} color option">`; carousel.appendChild(slide); } });
+    if(swiper) swiper.destroy(true, true);
+    swiper = new Swiper(".mySwiper", { loop: false, navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" }, pagination: { el: ".swiper-pagination", clickable: true } });
+    swiper.on('slideChange', () => { const slide = swiper.slides[swiper.activeIndex]; const color = slide.getAttribute('data-color'); if(color && selectedColor && color.toLowerCase() === selectedColor.toLowerCase()) return; if(color) { const colorSelect = document.getElementById('colorOptions'); if(colorSelect && [...colorSelect.options].some(opt => opt.value.toLowerCase() === color.toLowerCase())) { const matched = [...colorSelect.options].find(opt => opt.value.toLowerCase() === color.toLowerCase()); if(matched) { colorSelect.value = matched.value; selectedColor = matched.value; updatePriceAndPromo(); validateProceedButton(); } } } });
+  }
+
+  function syncCarouselWithColor() { if(swiper && selectedColor) { const slides = document.querySelectorAll('.swiper-slide'); const idx = Array.from(slides).findIndex(s => { const col = s.getAttribute('data-color'); return col && col.toLowerCase() === selectedColor.toLowerCase(); }); if(idx>=0) swiper.slideTo(idx); } }
+
+  // Back to top
+  window.addEventListener('scroll', () => { const btn = document.getElementById('backToTop'); if(window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible'); });
+  document.getElementById('backToTop').addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+  fetchData();
+</script>
+</body>
+</html>

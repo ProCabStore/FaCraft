@@ -1,0 +1,77 @@
+{
+  "categories": [
+    "shelf & hook",
+    "shelf & rack",
+    "rack"
+  ],
+
+  "material": {
+    "blockboard 18mm": {
+      "price": 0
+    },
+    "blockboard 15mm": {
+      "price": 0
+    },
+    "plywood 6mm": {
+      "price": 0
+    },
+    "melamine chipboard 16mm": {
+      "price": 0
+    },
+    "rubberwood 18mm": {
+      "price": 0
+    }
+  },
+
+  "colors": {
+    "formica colors": {
+      "white": 0,
+      "black": 0,
+      "oak": 0,
+      "navy blue": 0,
+      "green sage": 0
+    },
+    "melamine chipboard 16mm colors": {
+      "white": 0,
+      "black": 0,
+      "oak": 0,
+      "green sage": 0,
+      "navy blue": 0
+    },
+    "rubberwood 18mm colors": {
+      "natural": 100,
+      "classic teak": 100,
+      "natural walnut": 100
+    }
+  },
+
+  "accessory": {
+    "doorHinges": {
+      "normal": 0,
+      "soft close": 0,
+      "non soft close": 0,
+      "push to open": 0,
+      "undermount": 0
+    },
+    "drawerSlides": {
+      "normal": 0,
+      "soft close": 0,
+      "non soft close": 0,
+      "push to open": 0,
+      "undermount": 0
+    },
+    "pullOutPantrySlides" : {
+      "normal": 0,
+      "soft close": 0,
+      "non soft close": 0,
+      "push to open": 0,
+      "undermount": 0
+    }
+  },
+
+  "promotion": {
+    "active": true,
+    "description": "Special discounted items are marked with promotion flag in products.json",
+    "badgeColor": "#E63946"
+  }
+}

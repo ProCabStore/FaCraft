@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gallery - FA CRAFT</title>
+  <meta name="description" content="Behind-the-scenes and finished work from FA CRAFT – handcrafted wood pieces in progress." />
+  <meta property="og:title" content="FA CRAFT – Gallery" />
+  <meta property="og:description" content="See our craftsmanship in action." />
+  <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪵</text></svg>" />
+  <style>
+    :root {
+      --border: #e9ecef;
+      --text: #000;
+      --bg: #fff;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, Arial, sans-serif; background: var(--bg); color: var(--text); scroll-behavior: smooth; }
+    .hero { text-align: center; padding: 60px 20px 20px; }
+    .hero h1 { margin: 0; font-size: 2rem; }
+    .hero p { color: #444; max-width: 600px; margin: 10px auto 0; }
+    .gallery { max-width: 1100px; margin: auto; padding: 30px 20px 80px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+    .card { border: 1px solid var(--border); overflow: hidden; background: white; transition: 0.2s ease; }
+    .card:hover { transform: scale(1.02); }
+    .card img, .card video { width: 100%; display: block; }
+    .caption { padding: 10px; font-size: 0.9rem; border-top: 1px solid var(--border); }
+    .loading { text-align: center; padding: 40px; color: #666; }
+    .back-to-top { position: fixed; bottom: 20px; right: 20px; background: #1F2A1B; color: white; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; transition: opacity 0.3s; z-index: 99; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+    .back-to-top.visible { opacity: 1; }
+  </style>
+</head>
+<body>
+<div id="navbar-placeholder"></div>
+<section class="hero">
+  <h1>Our Showcase</h1>
+  <p>Handcrafted woodworking pieces, behind-the-scenes builds, and finished products.</p>
+</section>
+<div id="loading" class="loading">Loading gallery...</div>
+<section class="gallery" id="gallery"></section>
+<div class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></div>
+<footer style="border-top:1px solid #EFECE4; padding:48px 0 32px; background:#FFFFFF; text-align:center; margin-top:20px;">
+  <p>&copy; 2025 FA CRAFT — Solid wood furniture & home organizers.</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+<script>
+  (function() {
+    const navbarPlaceholder = document.getElementById('navbar-placeholder');
+    if (!navbarPlaceholder) return;
+    fetch('navbar.html')
+      .then(response => { if (!response.ok) throw new Error(); return response.text(); })
+      .then(html => { navbarPlaceholder.innerHTML = html; const toggleBtn = document.getElementById('navbarToggle'); const menu = document.getElementById('navbarMenu'); if (toggleBtn && menu) { const newBtn = toggleBtn.cloneNode(true); toggleBtn.parentNode?.replaceChild(newBtn, toggleBtn); newBtn.addEventListener('click', () => { const expanded = newBtn.getAttribute('aria-expanded') === 'true'; newBtn.setAttribute('aria-expanded', !expanded); newBtn.classList.toggle('is-active'); menu.classList.toggle('is-active'); }); } })
+      .catch(() => { navbarPlaceholder.innerHTML = `<nav style="background:#fff; border-bottom:1px solid #eee; padding:0.75rem 1.5rem;"><div style="max-width:1100px; margin:0 auto; display:flex; gap:1.5rem; font-size:0.9rem; justify-content:center;"><a href="index.html">Home</a><a href="our-products.html">Products</a><a href="gallery.html" style="color:#000; font-weight:500;">Gallery</a><a href="contact.html">Contact</a></div></nav>`; });
+  })();
+
+  async function loadGallery() {
+    const gallery = document.getElementById("gallery");
+    const loading = document.getElementById("loading");
+    try {
+      const res = await fetch("gallery.json");
+      const data = await res.json();
+      loading.style.display = "none";
+      data.items.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "card";
+        if (item.type === "image") {
+          card.innerHTML = `<img src="${item.src}" alt="${item.caption}"><div class="caption">${item.caption}</div>`;
+        }
+        if (item.type === "video") {
+          card.innerHTML = `<video controls preload="metadata" loading="lazy"><source src="${item.src}" type="video/mp4"></video><div class="caption">${item.caption}</div>`;
+        }
+        gallery.appendChild(card);
+      });
+    } catch (err) {
+      loading.innerText = "Failed to load gallery.";
+      console.error(err);
+    }
+  }
+  loadGallery();
+  // Back to top
+  window.addEventListener('scroll', () => { const btn = document.getElementById('backToTop'); if(window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible'); });
+  document.getElementById('backToTop').addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+</script>
+</body>
+</html>
