@@ -176,9 +176,7 @@
     try {
       const [pRes, oRes] = await Promise.all([fetch('products.json'), fetch('options.json')]);
       productsData = await pRes.json(); optionsData = await oRes.json(); window.optionsData = optionsData;
-      const featured = productsData
-        .filter(product => product.featured)
-        .sort((a, b) => (a.featuredOrder || 999) - (b.featuredOrder || 999));
+      const featured = productsData.filter(product => product.featured);
       grid.innerHTML = '';
       for (const product of featured) {
         const originalPrice = calculateOriginalPrice(product, optionsData);
