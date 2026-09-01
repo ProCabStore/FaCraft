@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Custom Orders – FA CRAFT</title>
+  <meta name="description" content="Browse custom furniture categories and request a personalised quote." />
+  <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪵</text></svg>" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #faf9f6; color: #1a1a1a; line-height: 1.5; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+    .hero { text-align: center; padding: 60px 20px 30px; }
+    .hero h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 8px; }
+    .hero p { color: #555; max-width: 600px; margin: 0 auto; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 28px; padding: 20px 0 60px; }
+    .card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.04); border: 1px solid #eee; transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 16px 32px rgba(0,0,0,0.07); }
+    .card img { width: 100%; height: 200px; object-fit: cover; background: #eee; }
+    .card-body { padding: 20px; }
+    .card-body h3 { font-size: 1.2rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+    .card-body p { color: #666; font-size: 0.9rem; margin-bottom: 16px; }
+    .btn { display: inline-block; background: #1f2a1b; color: white; padding: 10px 24px; border-radius: 40px; text-decoration: none; font-weight: 500; transition: background 0.2s; border: none; cursor: pointer; }
+    .btn:hover { background: #2f3d28; }
+    .btn-outline { background: transparent; color: #1f2a1b; border: 1px solid #ccc; }
+    .btn-outline:hover { background: #f0f0f0; }
+    .loading { text-align: center; padding: 60px; }
+    .footer { border-top: 1px solid #eee; padding: 40px 0; background: white; margin-top: 20px; text-align: center; color: #888; font-size: 0.8rem; }
+    @media (max-width: 600px) {
+      .container { padding: 0 16px; }
+      .hero h1 { font-size: 1.8rem; }
+      .grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .card img { height: 140px; }
+      .card-body { padding: 12px; }
+      .card-body h3 { font-size: 1rem; }
+      .btn { padding: 6px 14px; font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+<div id="navbar-placeholder"></div>
+
+<main>
+  <div class="hero">
+    <h1>Custom Furniture &amp; Interiors</h1>
+    <p>Browse our capabilities, get inspired, and request a personalised quote.</p>
+  </div>
+  <div class="container">
+    <div id="categoryGrid" class="grid">
+      <div class="loading">Loading categories…</div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2025 FA CRAFT — Solid Wood &amp; Bespoke Furniture</p>
+  </div>
+</footer>
+
+<script>
+  // Load navbar
+  (function() {
+    const placeholder = document.getElementById('navbar-placeholder');
+    if (placeholder) {
+      fetch('navbar.html')
+        .then(res => res.ok ? res.text() : Promise.reject())
+        .then(html => {
+          placeholder.innerHTML = html;
+          const btn = document.getElementById('navbarToggle');
+          const menu = document.getElementById('navbarMenu');
+          if (btn && menu) {
+            const newBtn = btn.cloneNode(true);
+            btn.parentNode.replaceChild(newBtn, btn);
+            newBtn.addEventListener('click', () => {
+              const expanded = newBtn.getAttribute('aria-expanded') === 'true';
+              newBtn.setAttribute('aria-expanded', !expanded);
+              newBtn.classList.toggle('is-active');
+              menu.classList.toggle('is-active');
+            });
+          }
+        })
+        .catch(() => {
+          placeholder.innerHTML = `<nav style="background:#fff; border-bottom:1px solid #eee; padding:0.75rem 1.5rem; text-align:center;"><a href="index.html" style="margin:0 12px;">Home</a><a href="custom-products.html" style="margin:0 12px; font-weight:600;">Custom</a><a href="our-products.html" style="margin:0 12px;">Products</a><a href="gallery.html" style="margin:0 12px;">Gallery</a><a href="promotion.html" style="margin:0 12px;">Promotions</a><a href="contact.html" style="margin:0 12px;">Contact</a></nav>`;
+        });
+    }
+  })();
+
+  // Load categories
+  async function loadCategories() {
+    const grid = document.getElementById('categoryGrid');
+    try {
+      const res = await fetch('custom-products.json');
+      const data = await res.json();
+      const categories = data.categories || [];
+      grid.innerHTML = '';
+      categories.forEach(cat => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.onclick = () => location.href = `custom-showcase.html?id=${cat.id}`;
+        card.innerHTML = `
+          <img src="${cat.coverImage}" alt="${cat.name}" loading="lazy">
+          <div class="card-body">
+            <h3>${cat.icon} ${cat.name}</h3>
+            <p>${cat.description}</p>
+            <span class="btn btn-outline">Explore →</span>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    } catch (e) {
+      grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px;">Unable to load categories. Please try again later.</div>`;
+    }
+  }
+  loadCategories();
+</script>
+</body>
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Custom Showcase – FA CRAFT</title>
+  <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪵</text></svg>" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #faf9f6; color: #1a1a1a; line-height: 1.5; overflow-x: hidden; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    /* Nav */
+    .back-link { display: inline-block; margin: 20px 0 10px; color: #555; text-decoration: none; font-size: 0.9rem; }
+    .back-link i { margin-right: 6px; }
+    .back-link:hover { color: #1a1a1a; }
+
+    /* Progress */
+    .progress-bar { display: flex; align-items: center; gap: 10px; margin: 20px 0 30px; flex-wrap: wrap; }
+    .progress-dots { display: flex; gap: 8px; flex: 1; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: #ddd; transition: background 0.3s; }
+    .dot.active { background: #1f2a1b; }
+    .dot.done { background: #8b9d7a; }
+    .step-label { font-size: 0.85rem; color: #888; font-weight: 500; }
+
+    /* Slide Container */
+    .slide-container { background: white; border-radius: 24px; box-shadow: 0 8px 30px rgba(0,0,0,0.05); border: 1px solid #eee; padding: 32px 36px; min-height: 400px; position: relative; }
+    .slide-title { font-size: 1.6rem; font-weight: 700; margin-bottom: 6px; }
+    .slide-desc { color: #666; margin-bottom: 24px; }
+    .slide-content {padding: 20px 0;min-height: 200px; }
+
+    /* Gallery */
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; }
+    .gallery-grid img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 12px; }
+
+    /* Grid (cards) */
+    .items-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
+    .item-card { background: #f8f8f8; border-radius: 12px; overflow: hidden; border: 1px solid #eee; transition: transform 0.2s; }
+    .item-card:hover { transform: scale(1.02); }
+    .item-card video, .item-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; background: #eee; }
+    .item-card .label { padding: 8px 10px; font-size: 0.8rem; font-weight: 500; text-align: center; background: white; }
+
+    /* Notes */
+    .notes-area textarea { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 12px; font-family: inherit; font-size: 0.95rem; min-height: 120px; resize: vertical; transition: border 0.2s; }
+    .notes-area textarea:focus { outline: none; border-color: #1f2a1b; }
+
+    /* Navigation Buttons */
+    .nav-buttons { display: flex; justify-content: space-between; align-items: center; margin-top: 28px; gap: 12px; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; border-radius: 40px; font-weight: 600; text-decoration: none; border: none; cursor: pointer; transition: all 0.2s; font-size: 0.95rem; }
+    .btn-back { background: #f0f0f0; color: #333; }
+    .btn-back:hover { background: #e0e0e0; }
+    .btn-next { background: #1f2a1b; color: white; }
+    .btn-next:hover { background: #2f3d28; transform: translateX(2px); }
+    .btn-whatsapp { background: #25D366; color: white; }
+    .btn-whatsapp:hover { background: #1da851; transform: scale(1.02); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    /* Loading */
+    .loading { text-align: center; padding: 60px; }
+
+    /* Footer */
+    .footer { border-top: 1px solid #eee; padding: 30px 0; margin-top: 40px; text-align: center; color: #888; font-size: 0.8rem; }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .container { padding: 0 12px; }
+      .slide-container { padding: 20px 16px; }
+      .slide-title { font-size: 1.2rem; }
+      .items-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .nav-buttons { flex-direction: column; align-items: stretch; }
+      .btn { justify-content: center; padding: 14px 20px; }
+      .progress-dots { gap: 6px; }
+      .dot { width: 8px; height: 8px; }
+    }
+  </style>
+</head>
+<body>
+<div id="navbar-placeholder"></div>
+
+<main>
+  <div class="container">
+    <a href="custom-products.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to categories</a>
+
+    <!-- Progress -->
+    <div class="progress-bar" id="progressBar">
+      <span class="step-label" id="stepLabel">Step 1 of 6</span>
+      <div class="progress-dots" id="progressDots"></div>
+    </div>
+
+    <!-- Slide Container -->
+    <div class="slide-container" id="slideContainer">
+      <div id="loadingIndicator" class="loading">Loading showcase…</div>
+      <div id="slideContent" style="display:none;">
+        <h2 class="slide-title" id="slideTitle"></h2>
+        <p class="slide-desc" id="slideDesc"></p>
+        <div class="slide-content" id="slideBody"></div>
+        <div class="nav-buttons">
+          <button class="btn btn-back" id="prevBtn"><i class="fas fa-arrow-left"></i> Back</button>
+          <button class="btn btn-next" id="nextBtn">Next <i class="fas fa-arrow-right"></i></button>
+          <a href="#" class="btn btn-whatsapp" id="whatsappBtn" style="display:none;" target="_blank"><i class="fab fa-whatsapp"></i> Request a Quote</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2025 FA CRAFT — Solid Wood &amp; Bespoke Furniture</p>
+  </div>
+</footer>
+
+<script>
+  // ============================================================
+  // 1. LOAD NAVBAR
+  // ============================================================
+  (function() {
+    const placeholder = document.getElementById('navbar-placeholder');
+    if (placeholder) {
+      fetch('navbar.html')
+        .then(res => res.ok ? res.text() : Promise.reject())
+        .then(html => {
+          placeholder.innerHTML = html;
+          const btn = document.getElementById('navbarToggle');
+          const menu = document.getElementById('navbarMenu');
+          if (btn && menu) {
+            const newBtn = btn.cloneNode(true);
+            btn.parentNode.replaceChild(newBtn, btn);
+            newBtn.addEventListener('click', () => {
+              const expanded = newBtn.getAttribute('aria-expanded') === 'true';
+              newBtn.setAttribute('aria-expanded', !expanded);
+              newBtn.classList.toggle('is-active');
+              menu.classList.toggle('is-active');
+            });
+          }
+        })
+        .catch(() => {
+          placeholder.innerHTML = `<nav style="background:#fff; border-bottom:1px solid #eee; padding:0.75rem 1.5rem; text-align:center;"><a href="index.html" style="margin:0 12px;">Home</a><a href="custom-products.html" style="margin:0 12px; font-weight:600;">Custom</a><a href="our-products.html" style="margin:0 12px;">Products</a><a href="gallery.html" style="margin:0 12px;">Gallery</a><a href="promotion.html" style="margin:0 12px;">Promotions</a><a href="contact.html" style="margin:0 12px;">Contact</a></nav>`;
+        });
+    }
+  })();
+
+  // ============================================================
+  // 2. STATE
+  // ============================================================
+  const urlParams = new URLSearchParams(window.location.search);
+  const categoryId = urlParams.get('id');
+
+  let allData = null;         // Full JSON
+  let category = null;        // Current category object
+  let slides = [];            // Array of slides for this category
+  let currentIndex = 0;
+  let notesValue = '';
+
+  // DOM refs
+  const loadingEl = document.getElementById('loadingIndicator');
+  const contentEl = document.getElementById('slideContent');
+  const titleEl = document.getElementById('slideTitle');
+  const descEl = document.getElementById('slideDesc');
+  const bodyEl = document.getElementById('slideBody');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const whatsappBtn = document.getElementById('whatsappBtn');
+  const dotsContainer = document.getElementById('progressDots');
+  const stepLabel = document.getElementById('stepLabel');
+
+  // ============================================================
+  // 3. LOAD DATA
+  // ============================================================
+  async function loadData() {
+    try {
+      const res = await fetch('custom-products.json');
+      allData = await res.json();
+      const categories = allData.categories || [];
+      category = categories.find(c => c.id === categoryId);
+      if (!category) throw new Error('Category not found');
+      slides = category.slides || [];
+      if (slides.length === 0) throw new Error('No slides found');
+      loadingEl.style.display = 'none';
+      contentEl.style.display = 'block';
+      renderSlide(0);
+    } catch (e) {
+      loadingEl.innerHTML = `Unable to load showcase. <a href="custom-products.html">Go back</a>`;
+      console.error(e);
+    }
+  }
+
+  // ============================================================
+  // 4. RENDER SLIDE
+  // ============================================================
+  function renderSlide(index) {
+    const slide = slides[index];
+    if (!slide) return;
+
+    // Update title & description
+    titleEl.textContent = slide.title || '';
+    descEl.textContent = slide.description || '';
+
+    // Update progress
+    updateProgress(index);
+
+    // Update buttons
+    prevBtn.style.display = index === 0 ? 'none' : 'inline-flex';
+    if (index === slides.length - 1) {
+      nextBtn.style.display = 'none';
+      whatsappBtn.style.display = 'inline-flex';
+      // Update WhatsApp link with notes
+      updateWhatsAppLink();
+    } else {
+      nextBtn.style.display = 'inline-flex';
+      whatsappBtn.style.display = 'none';
+    }
+
+    // Render body based on type
+    const type = slide.type || 'gallery';
+    switch (type) {
+      case 'gallery':
+        renderGallery(slide);
+        break;
+      case 'grid':
+        renderGrid(slide);
+        break;
+      case 'notes':
+        renderNotes(slide);
+        break;
+      default:
+        bodyEl.innerHTML = `<p>Unknown slide type: ${type}</p>`;
+    }
+
+    // Trigger video autoplay for visible videos
+    setTimeout(() => observeVideos(), 100);
+  }
+
+  // ============================================================
+  // 5. RENDER FUNCTIONS (Extensible)
+  // ============================================================
+
+  // 5a. Gallery – simple image grid
+  function renderGallery(slide) {
+    const items = slide.items || [];
+    let html = '<div class="gallery-grid">';
+    items.forEach(src => {
+      html += `<img src="${src}" alt="Gallery image" loading="lazy">`;
+    });
+    html += '</div>';
+    bodyEl.innerHTML = html;
+  }
+
+  // 5b. Grid – cards with image/video + label
+  function renderGrid(slide) {
+    const items = slide.items || [];
+    let html = '<div class="items-grid">';
+    items.forEach(item => {
+      const src = item.image || '';
+      const name = item.name || '';
+      const isVideo = src.match(/\.(mp4|webm|ogg)$/i);
+      if (isVideo) {
+        html += `
+          <div class="item-card">
+            <video muted autoplay loop playsinline preload="metadata">
+              <source src="${src}" type="video/mp4">
+            </video>
+            <div class="label">${name}</div>
+          </div>
+        `;
+      } else {
+        html += `
+          <div class="item-card">
+            <img src="${src}" alt="${name}" loading="lazy">
+            <div class="label">${name}</div>
+          </div>
+        `;
+      }
+    });
+    html += '</div>';
+    bodyEl.innerHTML = html;
+  }
+
+  // 5c. Notes – text area + whatsapp (shown on final slide)
+  function renderNotes(slide) {
+    bodyEl.innerHTML = `
+      <div class="notes-area">
+        <textarea id="notesTextarea" placeholder="Tell us what caught your eye, or describe your dream project. For example: 'I love the Shaker doors and pull-out pantry. I need a 2400mm wide kitchen cabinet.'"></textarea>
+      </div>
+    `;
+    const ta = document.getElementById('notesTextarea');
+    if (ta) {
+      ta.value = notesValue;
+      ta.addEventListener('input', (e) => {
+        notesValue = e.target.value;
+        updateWhatsAppLink();
+      });
+    }
+  }
+
+  // ============================================================
+  // 6. PROGRESS INDICATOR
+  // ============================================================
+  function updateProgress(index) {
+    const total = slides.length;
+    stepLabel.textContent = `Step ${index + 1} of ${total}`;
+
+    let dotsHtml = '';
+    for (let i = 0; i < total; i++) {
+      let cls = 'dot';
+      if (i === index) cls += ' active';
+      else if (i < index) cls += ' done';
+      dotsHtml += `<span class="${cls}"></span>`;
+    }
+    dotsContainer.innerHTML = dotsHtml;
+  }
+
+  // ============================================================
+  // 7. WHATSAPP LINK
+  // ============================================================
+  function updateWhatsAppLink() {
+    const catName = category ? category.name : 'Custom Project';
+    const notes = notesValue.trim();
+    let msg = `Hello FA CRAFT Team,%0A%0AI'm interested in a custom *${catName}* project.`;
+    if (notes) {
+      msg += `%0A%0A${encodeURIComponent(notes)}`;
+    }
+    msg += `%0A%0APlease let me know the next steps. Thank you.`;
+    whatsappBtn.href = `https://wa.me/601111213149?text=${msg}`;
+  }
+
+  // ============================================================
+  // 8. VIDEO AUTOPLAY (IntersectionObserver)
+  // ============================================================
+  function observeVideos() {
+    const videos = bodyEl.querySelectorAll('video');
+    if (!videos.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const video = entry.target;
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: 0.5 });
+
+    videos.forEach(v => observer.observe(v));
+  }
+
+  // ============================================================
+  // 9. NAVIGATION
+  // ============================================================
+  function goTo(index) {
+    if (index < 0 || index >= slides.length) return;
+    currentIndex = index;
+    renderSlide(index);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
+  nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') {
+      if (currentIndex < slides.length - 1) goTo(currentIndex + 1);
+    } else if (e.key === 'ArrowLeft') {
+      if (currentIndex > 0) goTo(currentIndex - 1);
+    }
+  });
+
+  // ============================================================
+  // 10. INIT
+  // ============================================================
+  if (categoryId) {
+    loadData();
+  } else {
+    loadingEl.innerHTML = 'No category selected. <a href="custom-products.html">Browse categories</a>';
+  }
+</script>
+</body>
+</html>

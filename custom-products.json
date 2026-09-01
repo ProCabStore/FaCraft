@@ -1,0 +1,276 @@
+{
+  "categories": [
+    {
+      "id": "kitchen",
+      "name": "Kitchen Cabinet",
+      "icon": "🍳",
+      "description": "Custom kitchen cabinets tailored to your cooking space and lifestyle.",
+      "coverImage": "photo/custom/kitchen-cover.jpg",
+      "slides": [
+        {
+          "id": "gallery",
+          "title": "Our Kitchen Projects",
+          "description": "Take a look at our recent kitchen cabinet installations — each one built to fit the space and style perfectly.",
+          "type": "gallery",
+          "items": [
+            "photo/custom/kitchen1.jpg",
+            "photo/custom/kitchen2.jpg",
+            "photo/custom/kitchen3.jpg",
+            "photo/custom/kitchen4.jpg",
+            "photo/custom/kitchen5.jpg"
+          ]
+        },
+        {
+          "id": "door-styles",
+          "title": "Door Designs",
+          "description": "The door style defines the character of your kitchen. Browse our most popular designs.",
+          "type": "grid",
+          "items": [
+            { "name": "Shaker", "image": "photo/custom/door-shaker.jpg" },
+            { "name": "Slab (Flat)", "image": "photo/custom/door-slab.jpg" },
+            { "name": "Fluted", "image": "photo/custom/door-fluted.jpg" },
+            { "name": "Glass Front", "image": "photo/custom/door-glass.jpg" },
+            { "name": "Louvered", "image": "photo/custom/door-louvered.jpg" },
+            { "name": "Rattan / Cane", "image": "photo/custom/door-rattan.jpg" }
+          ]
+        },
+        {
+          "id": "accessories",
+          "title": "Accessories & Mechanisms",
+          "description": "Watch how these smart accessories work — they make daily life easier and more organised.",
+          "type": "grid",
+          "items": [
+            { "name": "Soft-close hinges", "image": "photo/custom/accessory-softclose.mp4" },
+            { "name": "Pull-out pantry", "image": "photo/custom/accessory-pantry.mp4" },
+            { "name": "Lazy Susan corner", "image": "photo/custom/accessory-lazysusan.mp4" },
+            { "name": "Waste bin system", "image": "photo/custom/accessory-waste.mp4" },
+            { "name": "Drawer organisers", "image": "photo/custom/accessory-drawer.mp4" },
+            { "name": "Appliance lift", "image": "photo/custom/accessory-lift.mp4" }
+          ]
+        },
+        {
+          "id": "finishes",
+          "title": "Finishes & Colours",
+          "description": "The right finish brings your design to life. Here are some of our most requested options.",
+          "type": "grid",
+          "items": [
+            { "name": "Natural Rubberwood", "image": "photo/custom/finish-natural.jpg" },
+            { "name": "Classic Teak", "image": "photo/custom/finish-teak.jpg" },
+            { "name": "Natural Walnut", "image": "photo/custom/finish-walnut.jpg" },
+            { "name": "Matte White", "image": "photo/custom/finish-white.jpg" },
+            { "name": "Sage Green", "image": "photo/custom/finish-sage.jpg" },
+            { "name": "Navy Blue", "image": "photo/custom/finish-navy.jpg" }
+          ]
+        },
+        {
+          "id": "countertops",
+          "title": "Countertop Options",
+          "description": "Complete your kitchen with a countertop that matches your style and budget.",
+          "type": "grid",
+          "items": [
+            { "name": "Laminate", "image": "photo/custom/top-laminate.jpg" },
+            { "name": "Quartz", "image": "photo/custom/top-quartz.jpg" },
+            { "name": "Solid Surface", "image": "photo/custom/top-solidsurface.jpg" },
+            { "name": "Granite", "image": "photo/custom/top-granite.jpg" },
+            { "name": "Wood / Timber", "image": "photo/custom/top-wood.jpg" }
+          ]
+        },
+        {
+          "id": "notes",
+          "title": "Let's Bring Your Ideas to Life",
+          "description": "Tell us what caught your eye, or describe your dream project. We'll handle the rest.",
+          "type": "notes"
+        }
+      ]
+    },
+    {
+      "id": "wardrobe",
+      "name": "Wardrobe",
+      "icon": "👔",
+      "description": "Bespoke wardrobes designed to fit your space and organise your life.",
+      "coverImage": "photo/custom/wardrobe-cover.jpg",
+      "slides": [
+        {
+          "id": "gallery",
+          "title": "Our Wardrobe Projects",
+          "description": "From walk-in luxury to space-saving sliding doors — see what we've built.",
+          "type": "gallery",
+          "items": [
+            "photo/custom/wardrobe1.jpg",
+            "photo/custom/wardrobe2.jpg",
+            "photo/custom/wardrobe3.jpg",
+            "photo/custom/wardrobe4.jpg"
+          ]
+        },
+        {
+          "id": "door-styles",
+          "title": "Door Styles",
+          "description": "Choose the look that fits your bedroom aesthetic.",
+          "type": "grid",
+          "items": [
+            { "name": "Sliding Doors", "image": "photo/custom/wardrobe-sliding.jpg" },
+            { "name": "Hinged Doors", "image": "photo/custom/wardrobe-hinged.jpg" },
+            { "name": "Open Concept", "image": "photo/custom/wardrobe-open.jpg" },
+            { "name": "Glass Front", "image": "photo/custom/wardrobe-glass.jpg" }
+          ]
+        },
+        {
+          "id": "interior",
+          "title": "Interior Organisation",
+          "description": "Smart internal storage systems keep everything in its place.",
+          "type": "grid",
+          "items": [
+            { "name": "Pull-out trouser rack", "image": "photo/custom/wardrobe-trouser.mp4" },
+            { "name": "Shoe rack system", "image": "photo/custom/wardrobe-shoe.jpg" },
+            { "name": "Jewellery tray", "image": "photo/custom/wardrobe-jewellery.jpg" },
+            { "name": "Pull-down clothes lift", "image": "photo/custom/wardrobe-lift.mp4" }
+          ]
+        },
+        {
+          "id": "finishes",
+          "title": "Finishes & Colours",
+          "description": "Custom finishes to match your bedroom decor.",
+          "type": "grid",
+          "items": [
+            { "name": "Natural Wood", "image": "photo/custom/wardrobe-natural.jpg" },
+            { "name": "Classic Teak", "image": "photo/custom/wardrobe-teak.jpg" },
+            { "name": "Walnut", "image": "photo/custom/wardrobe-walnut.jpg" },
+            { "name": "White Gloss", "image": "photo/custom/wardrobe-white.jpg" }
+          ]
+        },
+        {
+          "id": "notes",
+          "title": "Let's Bring Your Ideas to Life",
+          "description": "Tell us what caught your eye, or describe your dream wardrobe.",
+          "type": "notes"
+        }
+      ]
+    },
+    {
+      "id": "tv-cabinet",
+      "name": "TV Cabinet",
+      "icon": "📺",
+      "description": "Modern media cabinets with clever cable management and stylish storage.",
+      "coverImage": "photo/custom/tv-cover.jpg",
+      "slides": [
+        {
+          "id": "gallery",
+          "title": "Our TV Cabinet Projects",
+          "description": "See how we've transformed living spaces with custom media cabinets.",
+          "type": "gallery",
+          "items": [
+            "photo/custom/tv1.jpg",
+            "photo/custom/tv2.jpg",
+            "photo/custom/tv3.jpg"
+          ]
+        },
+        {
+          "id": "styles",
+          "title": "Cabinet Styles",
+          "description": "From floating shelves to full-wall units — find your style.",
+          "type": "grid",
+          "items": [
+            { "name": "Floating", "image": "photo/custom/tv-floating.jpg" },
+            { "name": "Low Profile", "image": "photo/custom/tv-low.jpg" },
+            { "name": "Full Wall", "image": "photo/custom/tv-fullwall.jpg" },
+            { "name": "Corner Unit", "image": "photo/custom/tv-corner.jpg" }
+          ]
+        },
+        {
+          "id": "features",
+          "title": "Key Features",
+          "description": "Features that make your media setup clean and clutter-free.",
+          "type": "grid",
+          "items": [
+            { "name": "Cable management", "image": "photo/custom/tv-cable.jpg" },
+            { "name": "LED backlighting", "image": "photo/custom/tv-lighting.jpg" },
+            { "name": "Soundbar shelf", "image": "photo/custom/tv-soundbar.jpg" },
+            { "name": "Display shelves", "image": "photo/custom/tv-shelves.jpg" }
+          ]
+        },
+        {
+          "id": "notes",
+          "title": "Let's Bring Your Ideas to Life",
+          "description": "Tell us what caught your eye, or describe your ideal TV cabinet.",
+          "type": "notes"
+        }
+      ]
+    },
+    {
+      "id": "partition",
+      "name": "Room Divider / Partition",
+      "icon": "🧱",
+      "description": "Beautiful partitions that define spaces without closing them off.",
+      "coverImage": "photo/custom/partition-cover.jpg",
+      "slides": [
+        {
+          "id": "gallery",
+          "title": "Our Partition Projects",
+          "description": "See how we've used partitions to create elegant, functional spaces.",
+          "type": "gallery",
+          "items": [
+            "photo/custom/partition1.jpg",
+            "photo/custom/partition2.jpg",
+            "photo/custom/partition3.jpg"
+          ]
+        },
+        {
+          "id": "styles",
+          "title": "Partition Styles",
+          "description": "From fluted panels to slatted wood — choose your aesthetic.",
+          "type": "grid",
+          "items": [
+            { "name": "Fluted Panel", "image": "photo/custom/partition-fluted.jpg" },
+            { "name": "Slatted Wall", "image": "photo/custom/partition-slats.jpg" },
+            { "name": "Storage Partition", "image": "photo/custom/partition-storage.jpg" },
+            { "name": "Glass Partition", "image": "photo/custom/partition-glass.jpg" }
+          ]
+        },
+        {
+          "id": "notes",
+          "title": "Let's Bring Your Ideas to Life",
+          "description": "Tell us what caught your eye, or describe your ideal room divider.",
+          "type": "notes"
+        }
+      ]
+    },
+    {
+      "id": "fluted-wall",
+      "name": "Fluted Wall Panelling",
+      "icon": "🎨",
+      "description": "Elegant fluted and slatted wall panels for feature walls and interiors.",
+      "coverImage": "photo/custom/fluted-cover.jpg",
+      "slides": [
+        {
+          "id": "gallery",
+          "title": "Our Fluted Wall Projects",
+          "description": "See how fluted panelling transforms a space with texture and warmth.",
+          "type": "gallery",
+          "items": [
+            "photo/custom/fluted1.jpg",
+            "photo/custom/fluted2.jpg",
+            "photo/custom/fluted3.jpg"
+          ]
+        },
+        {
+          "id": "materials",
+          "title": "Materials & Finishes",
+          "description": "Choose the look that fits your interior style.",
+          "type": "grid",
+          "items": [
+            { "name": "Wood Veneer", "image": "photo/custom/fluted-wood.jpg" },
+            { "name": "MDF Painted", "image": "photo/custom/fluted-mdf.jpg" },
+            { "name": "Acrylic", "image": "photo/custom/fluted-acrylic.jpg" },
+            { "name": "Rattan / Cane", "image": "photo/custom/fluted-rattan.jpg" }
+          ]
+        },
+        {
+          "id": "notes",
+          "title": "Let's Bring Your Ideas to Life",
+          "description": "Tell us what caught your eye, or describe where you'd like to use fluted panelling.",
+          "type": "notes"
+        }
+      ]
+    }
+  ]
+}
